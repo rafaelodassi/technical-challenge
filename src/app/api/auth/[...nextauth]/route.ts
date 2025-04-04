@@ -21,7 +21,7 @@ declare module 'next-auth' {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     KeycloakProvider({
       clientId: process.env.CLIENT_ID as string,
