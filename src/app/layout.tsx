@@ -16,6 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <title>Technical Challenge</title>
       <body className={inter.className}>
         <SessionProvider>
           <AppProvider>

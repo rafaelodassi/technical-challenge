@@ -1,17 +1,22 @@
 import { NewProcessDialog } from '@/components/NewProcessDialog';
 import { Button } from '@/components/ui/Button';
 import { useApp } from '@/context/AppContext';
+import initials from 'initials';
 import { Menu } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 import Logo from '../../public/imgs/logo.png';
 
 const Header = () => {
+  const { data: session } = useSession();
   const { setOpenNewProcess } = useApp();
 
   const handleOpenNewProcessDialog = () => {
     setOpenNewProcess(true);
   };
+
+  const initialsName = initials(session?.user?.name ?? 'Guest');
 
   return (
     <>
@@ -29,9 +34,9 @@ const Header = () => {
         </div>
         <div className='flex items-center gap-2'>
           <div className='text-[13px] bg-custom-gray-40 rounded-full w-[30px] h-[30px] flex items-center justify-center'>
-            JC
+            {initialsName}
           </div>
-          <span className='text-[10px]'>Administrator</span>
+          <span className='text-[10px]'>{session?.user?.name ?? 'Guest'}</span>
         </div>
       </header>
       <section className='h-[94px] bg-white px-8 flex flex-col justify-center'>
