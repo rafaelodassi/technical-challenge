@@ -48,6 +48,10 @@ NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=lqr++EPg9L4qvGSPQnCIEToZF60S9mURsPNeV42NC5k=
 ```
 
+## ⚠️ Atenção
+
+As rotas de api do servidor estão com CORS habilitado, para testar a aplicação, será necessário desabilitar o CORS no servidor, liberar para localhost:3000 ou utilizar alguma extensão do navegador que ignora o CORS do navegador.
+
 ## 🛠️ Construído com
 
 Principais ferramentas utilizadas no projeto
