@@ -12,7 +12,7 @@ import { useSession, signIn } from 'next-auth/react';
 
 const Home = () => {
   const { status } = useSession();
-  const { viewMode, getProcess, process } = useApp();
+  const { viewMode, getProcess, process, error, loading } = useApp();
   const data = useMemo(() => process?.content ?? [], [process]);
 
   useEffect(() => {
@@ -23,6 +23,33 @@ const Home = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
+
+  if (error) {
+    return (
+      <main className='grow p-8 pb-4 flex flex-col gap-4'>
+        <Filters />
+        <span>Error while listing the processes</span>
+      </main>
+    );
+  }
+
+  if (loading) {
+    return (
+      <main className='grow p-8 pb-4 flex flex-col gap-4'>
+        <Filters />
+        <span>Loagind...</span>
+      </main>
+    );
+  }
+
+  if (!data.length && !loading) {
+    return (
+      <main className='grow p-8 pb-4 flex flex-col gap-4'>
+        <Filters />
+        <span>No processes found</span>
+      </main>
+    );
+  }
 
   return (
     <>
