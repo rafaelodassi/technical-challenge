@@ -1,39 +1,28 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { Filters } from '@/components/Filters';
 import { Pagination } from '@/components/Pagination';
 import { ProcessItem } from '@/components/ProcessItem';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { useApp } from '@/context/AppContext';
-import { useFetchData } from '@/hooks/useFetchData';
 import { cn } from '@/lib/utils';
-import { ResponseProcess } from '@/services/types';
 import { useSession, signIn } from 'next-auth/react';
 
 const Home = () => {
-  const { data: session, status } = useSession();
-
-  const { data, fetchData, error } = useFetchData<ResponseProcess>({
-    url: 'process-fe-challenge',
-    method: 'get',
-  });
-
-  const { viewMode } = useApp();
-
-  const process = data?.content ?? [];
+  const { status } = useSession();
+  const { viewMode, getProcess, process } = useApp();
+  const data = useMemo(() => process?.content ?? [], [process]);
 
   useEffect(() => {
-    if (status === 'authenticated' && session?.account.access_token) {
-      fetchData();
+    if (status === 'authenticated') {
+      getProcess();
+    } else if (status === 'unauthenticated') {
+      signIn('keycloak');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
-
-  if (error) {
-    signIn('keycloak');
-  }
 
   return (
     <>
@@ -46,8 +35,8 @@ const Home = () => {
               viewMode === 'list' && 'flex-col flex-nowrap'
             )}
           >
-            {process.map((p) => (
-              <ProcessItem process={p} key={p.identifier} />
+            {data.map((process) => (
+              <ProcessItem process={process} key={process.identifier} />
             ))}
           </div>
         </ScrollArea>

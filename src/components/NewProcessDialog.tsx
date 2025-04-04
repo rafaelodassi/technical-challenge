@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
 import { useApp } from '@/context/AppContext';
+import { Process } from '@/services/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -30,7 +31,7 @@ const formSchema = z.object({
 });
 
 const NewProcessDialog = () => {
-  const { openNewProcess, setOpenNewProcess } = useApp();
+  const { openNewProcess, setOpenNewProcess, addProcess } = useApp();
 
   const handleClose = () => {
     setOpenNewProcess(false);
@@ -46,7 +47,7 @@ const NewProcessDialog = () => {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    addProcess({ process: values as unknown as Process });
   };
 
   return (

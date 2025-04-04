@@ -10,33 +10,44 @@ import { useApp, ViewMode } from '@/context/AppContext';
 import { cn } from '@/lib/utils';
 
 const Filters = () => {
-  const { setViewMode, viewMode } = useApp();
+  const { setViewMode, viewMode, getProcess } = useApp();
 
   const handleChangeViewMode = (value: ViewMode) => {
     setViewMode(value);
   };
 
+  const handleSearch = (value: string) => {
+    getProcess({ search: value });
+  };
+
+  const handleSelect = (value: string) => {
+    getProcess({ sort: value });
+  };
+
   return (
     <div className='flex items-center gap-4'>
-      <Input className='grow' placeholder='Search' />
-      <Select>
+      <Input
+        className='grow'
+        placeholder='Search'
+        onChange={(e) => handleSearch(e.target.value)}
+      />
+      <Select disabled>
         <SelectTrigger className='w-[240px]'>
           <SelectValue placeholder='Filter by name' />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value='light'>Light</SelectItem>
-          <SelectItem value='dark'>Dark</SelectItem>
-          <SelectItem value='system'>System</SelectItem>
+          <SelectItem value='name'>Name</SelectItem>
         </SelectContent>
       </Select>
-      <Select>
+      <Select onValueChange={handleSelect}>
         <SelectTrigger className='w-[240px]'>
           <SelectValue placeholder='Sort by' />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value='light'>Light</SelectItem>
-          <SelectItem value='dark'>Dark</SelectItem>
-          <SelectItem value='system'>System</SelectItem>
+          <SelectItem value='name'>Name</SelectItem>
+          <SelectItem value='priority'>priority</SelectItem>
+          <SelectItem value='status'>Status</SelectItem>
+          <SelectItem value='dateCreation'>Date Creation</SelectItem>
         </SelectContent>
       </Select>
       <div className='bg-custom-gray-60 flex items-center h-10 p-1 grow whitespace-nowrap'>
