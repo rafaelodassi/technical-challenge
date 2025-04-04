@@ -1,42 +1,42 @@
 # Technical Challenge
 
-Aplicação para gerenciamento de processos.
+Application for process management.
 
-## 🚀 Começando
+## 🚀 Getting started
 
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
 
-### 📋 Pré-requisitos
+### 📋 Prerequisites
 
-- NodeJS 20.10.0 ou maior instalado na máquina local
+- NodeJS version 20.10.0 or higher installed on the local machine
 
-### 🔧 Instalação
+### 🔧 Installation
 
-Baixar e ir para a pasta do projeto
+Download and navigate to the project folder
 
 ```
 cd technical-challenge
 ```
 
-Instalar dependências
+Install dependencies
 
 ```
 npm install
 ```
 
-Rodar o projeto local
+Run the project locally
 
 ```
 npm run dev
 ```
 
-Abrir a url do projeto no navegador
+Open the project URL in the browser
 
 ```
 http://localhost:3000/
 ```
 
-As variáveis podem ser alimentadas conforme a necessidade (.env)
+The variables can be set as needed in the .env file
 
 ```
 KEYCLOAK_URL=https://staging.botcity.dev:8050/realms/fe-test
@@ -48,18 +48,18 @@ NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=lqr++EPg9L4qvGSPQnCIEToZF60S9mURsPNeV42NC5k=
 ```
 
-## ⚠️ Atenção
+## ⚠️ Attention
 
-As rotas de api do servidor estão com CORS habilitado, para testar a aplicação, será necessário desabilitar o CORS no servidor, liberar para localhost:3000 ou utilizar alguma extensão do navegador que ignora o CORS.
+The server's API routes have CORS enabled. To test the application, you will need to either disable CORS on the server, allow requests from localhost:3000, or use a browser extension that bypasses CORS.
 
-## 🛠️ Construído com
+## 🛠️ Built with
 
-Principais ferramentas utilizadas no projeto
+Main tools used in the project
 
-- [React](https://react.dev/) - Biblioteca para web e interfaces de usuário
+- [React](https://react.dev/) - Library for web and user interfaces
 - [NextJS](https://nextjs.org/) - Framework React
-- [NextAuth.js](https://next-auth.js.org/) - Autenticação
+- [NextAuth.js](https://next-auth.js.org/) - Authentication
 - [Tailwind CSS](https://v3.tailwindcss.com/) - CSS
-- [TypeScript](https://www.typescriptlang.org/) - Tipagem e padrão de código
-- [ESLint](https://eslint.org/) - Análise de código
-- [Prettier](https://prettier.io/) - Formatação de código
+- [TypeScript](https://www.typescriptlang.org/) - Typing and code standards
+- [ESLint](https://eslint.org/) - Code analysis
+- [Prettier](https://prettier.io/) - Code formatting
