@@ -2,11 +2,13 @@
 
 import { useCallback } from 'react';
 
-import { EntryCard } from '@/components/EntryCard';
+import { EntryItem } from '@/components/EntryItem';
 import { Filters } from '@/components/Filters';
 import { Pagination } from '@/components/Pagination';
 import { ScrollArea } from '@/components/ui/ScrollArea';
+import { useApp } from '@/context/AppContext';
 import { useFetchData } from '@/hooks/useFetchData';
+import { cn } from '@/lib/utils';
 import { useKeycloak } from '@react-keycloak/web';
 
 const dataMock = [
@@ -30,6 +32,7 @@ const dataMock = [
 const Home = () => {
   const { keycloak } = useKeycloak();
   const { data } = useFetchData({ url: 'process-fe-challenge' });
+  const { viewMode } = useApp();
 
   const handleLogOut = useCallback(() => {
     keycloak?.login();
@@ -43,9 +46,14 @@ const Home = () => {
         <button onClick={handleLogOut}>login</button>
         <Filters />
         <ScrollArea className='grow h-[calc(100vh-318px)]' type='always'>
-          <div className='flex gap-4 flex-wrap content-start'>
+          <div
+            className={cn(
+              'flex gap-4 flex-wrap content-start',
+              viewMode === 'list' && 'flex-col flex-nowrap'
+            )}
+          >
             {dataMock.map((entry) => (
-              <EntryCard entry={entry} key={entry.id} />
+              <EntryItem entry={entry} key={entry.id} />
             ))}
           </div>
         </ScrollArea>

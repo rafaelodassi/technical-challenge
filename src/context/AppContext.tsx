@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-type ViewMode = 'list' | 'grid';
+export type ViewMode = 'list' | 'grid';
 
 interface AppContext {
   viewMode: ViewMode;
@@ -18,7 +18,7 @@ interface AppProvider {
 export const AppContext = createContext<AppContext | undefined>(undefined);
 
 export const AppProvider = ({ children }: AppProvider) => {
-  const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [openNewEntry, setOpenNewEntry] = useState(false);
 
   return (
