@@ -36,6 +36,18 @@ Abrir a url do projeto no navegador
 http://localhost:3000/
 ```
 
+As variáveis podem ser alimentadas conforme a necessidade (.env)
+
+```
+KEYCLOAK_URL=https://staging.botcity.dev:8050/realms/fe-test
+NEXT_PUBLIC_BASE_KEYCLOAK_URL=http://localhost:3000
+CLIENT_ID=test
+SECRET=VCZ4ke7ErTGy4NuqPlufwnob4OlglTk9jy6C5qNcvQ8=
+LOGOUT_REDIRECT_URL=http://localhost:3000
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=lqr++EPg9L4qvGSPQnCIEToZF60S9mURsPNeV42NC5k=
+```
+
 ## 🛠️ Construído com
 
 Principais ferramentas utilizadas no projeto
