@@ -1,9 +1,8 @@
 'use client';
 
-import { keycloak } from '@/auth/config';
 import { Header } from '@/components/Header';
 import { AppProvider } from '@/context/AppContext';
-import { ReactKeycloakProvider } from '@react-keycloak/web';
+import { SessionProvider } from 'next-auth/react';
 import { Inter } from 'next/font/google';
 
 import './globals.css';
@@ -18,14 +17,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <ReactKeycloakProvider authClient={keycloak}>
+        <SessionProvider>
           <AppProvider>
             <div className='flex flex-col min-h-screen bg-custom-gray-10'>
               <Header />
               {children}
             </div>
           </AppProvider>
-        </ReactKeycloakProvider>
+        </SessionProvider>
       </body>
     </html>
   );

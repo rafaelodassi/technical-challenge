@@ -1,4 +1,4 @@
-import { NewEntryDialog } from '@/components/NewEntryDialog';
+import { NewProcessDialog } from '@/components/NewProcessDialog';
 import { Button } from '@/components/ui/Button';
 import { useApp } from '@/context/AppContext';
 import { Menu } from 'lucide-react';
@@ -7,10 +7,10 @@ import Image from 'next/image';
 import Logo from '../../public/imgs/logo.png';
 
 const Header = () => {
-  const { setOpenNewEntry } = useApp();
+  const { setOpenNewProcess } = useApp();
 
-  const handleOpenNewEntryDialog = () => {
-    setOpenNewEntry(true);
+  const handleOpenNewProcessDialog = () => {
+    setOpenNewProcess(true);
   };
 
   return (
@@ -41,13 +41,13 @@ const Header = () => {
           <Button
             size='lg'
             variant='outline'
-            onClick={handleOpenNewEntryDialog}
+            onClick={handleOpenNewProcessDialog}
           >
             New entry
           </Button>
         </div>
       </section>
-      <NewEntryDialog />
+      <NewProcessDialog />
     </>
   );
 };

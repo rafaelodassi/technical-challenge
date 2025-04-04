@@ -7,8 +7,8 @@ export type ViewMode = 'list' | 'grid';
 interface AppContext {
   viewMode: ViewMode;
   setViewMode: (viewMode: ViewMode) => void;
-  openNewEntry: boolean;
-  setOpenNewEntry: (openNewEntry: boolean) => void;
+  openNewProcess: boolean;
+  setOpenNewProcess: (openNewProcess: boolean) => void;
 }
 
 interface AppProvider {
@@ -19,15 +19,15 @@ export const AppContext = createContext<AppContext | undefined>(undefined);
 
 export const AppProvider = ({ children }: AppProvider) => {
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
-  const [openNewEntry, setOpenNewEntry] = useState(false);
+  const [openNewProcess, setOpenNewProcess] = useState(false);
 
   return (
     <AppContext.Provider
       value={{
         viewMode,
         setViewMode,
-        openNewEntry,
-        setOpenNewEntry,
+        openNewProcess,
+        setOpenNewProcess,
       }}
     >
       {children}

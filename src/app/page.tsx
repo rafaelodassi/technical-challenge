@@ -1,49 +1,43 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useEffect } from 'react';
 
-import { EntryItem } from '@/components/EntryItem';
 import { Filters } from '@/components/Filters';
 import { Pagination } from '@/components/Pagination';
+import { ProcessItem } from '@/components/ProcessItem';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { useApp } from '@/context/AppContext';
 import { useFetchData } from '@/hooks/useFetchData';
 import { cn } from '@/lib/utils';
-import { useKeycloak } from '@react-keycloak/web';
-
-const dataMock = [
-  { id: '1' },
-  { id: '2' },
-  { id: '3' },
-  { id: '4' },
-  { id: '5' },
-  { id: '6' },
-  { id: '7' },
-  { id: '8' },
-  { id: '9' },
-  { id: '10' },
-  { id: '11' },
-  { id: '12' },
-  { id: '13' },
-  { id: '14' },
-  { id: '15' },
-];
+import { ResponseProcess } from '@/services/types';
+import { useSession, signIn } from 'next-auth/react';
 
 const Home = () => {
-  const { keycloak } = useKeycloak();
-  const { data } = useFetchData({ url: 'process-fe-challenge' });
+  const { data: session, status } = useSession();
+
+  const { data, fetchData, error } = useFetchData<ResponseProcess>({
+    url: 'process-fe-challenge',
+    method: 'get',
+  });
+
   const { viewMode } = useApp();
 
-  const handleLogOut = useCallback(() => {
-    keycloak?.login();
-  }, [keycloak]);
+  const process = data?.content ?? [];
 
-  console.log(data, keycloak);
+  useEffect(() => {
+    if (status === 'authenticated' && session?.account.access_token) {
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  if (error) {
+    signIn('keycloak');
+  }
 
   return (
     <>
       <main className='grow p-8 pb-4 flex flex-col gap-4'>
-        <button onClick={handleLogOut}>login</button>
         <Filters />
         <ScrollArea className='grow h-[calc(100vh-318px)]' type='always'>
           <div
@@ -52,8 +46,8 @@ const Home = () => {
               viewMode === 'list' && 'flex-col flex-nowrap'
             )}
           >
-            {dataMock.map((entry) => (
-              <EntryItem entry={entry} key={entry.id} />
+            {process.map((p) => (
+              <ProcessItem process={p} key={p.identifier} />
             ))}
           </div>
         </ScrollArea>

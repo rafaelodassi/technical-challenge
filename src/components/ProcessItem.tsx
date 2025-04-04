@@ -1,34 +1,36 @@
 import { Badge } from '@/components/ui/Badge';
 import { useApp } from '@/context/AppContext';
 import { cn } from '@/lib/utils';
+import { Process } from '@/services/types';
+import dayjs from 'dayjs';
 
-interface EntryItem {
-  entry: {
-    id: string;
-  };
+interface ProcessItemProps {
+  process: Process;
 }
 
-const EntryItem = ({ entry }: EntryItem) => {
+const ProcessItem = ({ process }: ProcessItemProps) => {
   const { viewMode } = useApp();
-  const { id } = entry;
+  const { identifier, name, priority, dateCreation } = process;
 
-  const renderHeaderEntry = () => (
+  const renderHeaderProcess = () => (
     <div className='flex items-center gap-1'>
-      <span className='grow text-sm text-custom-gray-70'>ID 293841094</span>
+      <span className='grow text-sm text-custom-gray-70'>ID {identifier}</span>
       <div className='shrink-0 w-6 h-6 bg-primary text-white text-base rounded-full text-center'>
         C
       </div>
     </div>
   );
 
-  const renderFooterEntry = () => (
+  const renderFooterProcess = () => (
     <>
-      <h1 className='text-xl text-custom-gray-100'>Payroll Processing</h1>
+      <h1 className='text-xl text-custom-gray-100'>{name}</h1>
       <div className='flex gap-2 grow items-start'>
-        <Badge variant='cyan'>93</Badge>
+        <Badge variant='cyan'>{priority}</Badge>
         <Badge variant='purple'>Assessing</Badge>
       </div>
-      <div className='text-sm text-custom-gray-70'>7/26/2024</div>
+      <div className='text-sm text-custom-gray-70'>
+        {dayjs(dateCreation).format('M/DD/YYYY')}
+      </div>
     </>
   );
 
@@ -36,16 +38,16 @@ const EntryItem = ({ entry }: EntryItem) => {
     if (viewMode === 'grid') {
       return (
         <>
-          {renderHeaderEntry()}
-          {renderFooterEntry()}
+          {renderHeaderProcess()}
+          {renderFooterProcess()}
         </>
       );
     }
 
     return (
       <>
-        {renderHeaderEntry()}
-        <div className='flex items-center gap-2'>{renderFooterEntry()}</div>
+        {renderHeaderProcess()}
+        <div className='flex items-center gap-2'>{renderFooterProcess()}</div>
       </>
     );
   };
@@ -62,4 +64,4 @@ const EntryItem = ({ entry }: EntryItem) => {
   );
 };
 
-export { EntryItem };
+export { ProcessItem };

@@ -29,11 +29,11 @@ const formSchema = z.object({
   priority: z.string().nonempty('Priority is required'),
 });
 
-const NewEntryDialog = () => {
-  const { openNewEntry, setOpenNewEntry } = useApp();
+const NewProcessDialog = () => {
+  const { openNewProcess, setOpenNewProcess } = useApp();
 
   const handleClose = () => {
-    setOpenNewEntry(false);
+    setOpenNewProcess(false);
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -50,7 +50,7 @@ const NewEntryDialog = () => {
   };
 
   return (
-    <Dialog open={openNewEntry} onOpenChange={setOpenNewEntry}>
+    <Dialog open={openNewProcess} onOpenChange={setOpenNewProcess}>
       <DialogTrigger asChild>Edit Profile</DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
         <DialogHeader>
@@ -118,4 +118,4 @@ const NewEntryDialog = () => {
   );
 };
 
-export { NewEntryDialog };
+export { NewProcessDialog };
